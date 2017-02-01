@@ -17,6 +17,35 @@ $ docker search ocpazure
 NAME                DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
 relocaio/ocpazure   Deploying Openshift Enterprise to Azure wi...   0
 ```
+## How to use it
+
+```
+cd /tmp
+git clone https://github.com/ivanthelad/ansible-azure.git
+cd ansible-azure/docker
+docker build -t ocpazure:latest .
+```
+or
+You can use the docker image ***ocpazure:latest*** I created on docker.io
+
+```
+cd /tmp/ansible-azure
+mkdir exports
+docker run -v /tmp/ansible-azure/exports/:/exports/ -it ocpazure /bin/bash
+```
+
+# start installation in the docker container ***./install.sh*** you have to prepare a ***all*** file into the /exports directory 
+
+# when installation done 
+
+```
+ls exports
+ssh -i exports/azurekey.YOUR-RESOURCE-GROUP USERNAME@JUMPHOST
+
+example : $ ssh -i azurekey.ocphaazure dwojciec@13.79.38.198
+Last login: Wed Feb  1 14:03:19 2017 from jumphost1
+[dwojciec@jumphost1 ~]$
+```
 
 ## Sample ALL config
 The following configs are required
