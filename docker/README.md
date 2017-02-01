@@ -9,6 +9,15 @@ Installation is done with Docker container and environmental variables that are 
 * Red Hat account and Openshift Enterprise subscription
 * Docker
 
+## Docker image uploaded on Docker.io
+https://hub.docker.com/r/relocaio/ocpazure/
+
+```
+$ docker search ocpazure
+NAME                DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+relocaio/ocpazure   Deploying Openshift Enterprise to Azure wi...   0
+```
+
 ## Sample ALL config
 The following configs are required
 
