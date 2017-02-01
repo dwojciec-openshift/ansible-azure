@@ -36,7 +36,7 @@ mkdir exports
 docker run -v /tmp/ansible-azure/exports/:/exports/ -it ocpazure /bin/bash
 ```
 
-# start installation in the docker container ***./install.sh*** you have to prepare a ***all*** file into the /exports directory 
+start installation in the docker container ***./install.sh*** you have to prepare a ***all*** file into the /exports directory 
 
 # when installation done 
 
