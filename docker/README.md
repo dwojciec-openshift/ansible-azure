@@ -5,7 +5,9 @@ Installation is done with Docker container and environmental variables that are 
 
 ## What you need to for the installation
 * Azure AD account
-* Enough quota for cores (by default 10 cores )
+* Enough quota for cores (by default 10 cores ). 
+if you have a issue like : ***Operation results in exceeding quota limits of Core. Maximum allowed: 4, Current in use: 3, Additional requested: 2***
+you have to log a Ticket to Azure support to increase your quota limits of Core. 
 * Red Hat account and Openshift Enterprise subscription
 * Docker
 
