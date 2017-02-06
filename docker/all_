@@ -1,0 +1,131 @@
+#---
+### This example is a single master with 1 infra nodes and 1 app nodes. Its the smallest 'production' like cluster you can provision
+openshiftversion: 3.4
+resource_group_name: CHANGEME 
+##  Azure AD user.
+ad_username: CHANGEME
+### Azure AD password
+ad_password: CHANGEME
+
+#### Azure Subscription ID
+subscriptionID: CHANGEME
+## user to login to the jump host. this user will only be created on the jumphost
+adminUsername: SOMEUSERNAME
+## user pwd for jump host
+## Password for the jump host
+adminPassword: SOMEPASSWORD
+##### Public key for jump host
+sshkey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDF/pNFkBtvRYDGyzwvFN1qPTjsTrJ2tZpfx5q8GrbLTjBX2Er6qYRSNMJZUo+q+th/OLXOB2/Rt4EiPdZq4Wgm+78eh8udLwmYU+nX9gWWMxNqw6/H77lqWSAcsGzeiSZp6CA1TgTSv85JPJ99yv61w9JNSUSUVF1zB4oKx0qFXJnEvRz7o5AHAgaeOQOhRyrXksvDlh74Q0jCLB4BwtSj4LscgKT06PnRbC221+r+6l5GiO2AQxbJ8eTo1O4+Zu2nsG8DpVmQRZOGSM6nj8zESAyYDJ4/pxz3L8OAD02eyqwlYsdyHZYBsVnSgjyvAy+G8LHLr25sqRvyw6QXq0iH root@658f0fc2b1e5
+
+
+# see https://azure.microsoft.com/en-us/documentation/articles/cloud-services-sizes-specs/
+### Size for the master
+master_vmSize: Standard_DS3_v2
+#master_vmSize: Standard_D2_v2
+#master_vmSize: Standard_D1_v2
+
+### Size for the nodes
+node_vmSize: Standard_DS3_v2
+#node_vmSize: Standard_D2_v2
+#node_vmSize: Standard_D1_v2
+
+#### Region to deploy in
+region: northeurope
+
+## docker info
+docker_storage_device: /dev/sdc
+create_vgname: docker_vg
+filesystem: 'xfs'
+create_lvsize: '80%FREE'
+#create_lvsize: '2g'
+
+#### subscription information
+rh_subcription_user: CHANGE
+rh_subcription_pass: CHANGE
+openshift_pool_id: CHANGE
+
+########### list of node  ###########
+### Warning, you currently cannot create more infra nodes ####
+### this will change in the future
+### You can add as many nodes as you want
+#####################################
+
+jumphost:
+  jumphost1:
+    name: jumphost1
+    datadisksize: 64
+    machinesize: Standard_D1_v2
+    storagtype: Standard_LRS
+    tags:
+      region: "{{ region }}"
+      zone: jumphost
+      stage: jumphost
+      type: jumphost
+
+masters:
+  master1:
+    name: master1
+    datadisksize: 80
+    machinesize: Standard_DS2_v2
+    storagtype: Standard_LRS
+    tags:
+      region: "{{ region }}"
+      infra: "false"
+  master2:
+    name: master2
+    datadisksize: 80
+    machinesize: Standard_DS2_v2
+    storagtype: Standard_LRS
+    tags:
+      region: "{{ region }}"
+      infra: "false"
+  master3:
+    name: master3
+    datadisksize: 80
+    machinesize: Standard_DS2_v2
+    storagtype: Standard_LRS
+    tags:
+      region: "{{ region }}"
+      infra: "false"
+
+infranodes:
+  infranode1:
+    name: infranode1
+    datadisksize: 80
+    machinesize: Standard_DS3_v2
+    storagtype: Standard_LRS
+    tags:
+      region: "{{ region }}"
+      infra: "true"
+      infratype: registry
+  infranode2:
+    name: infranode2
+    datadisksize: 80
+    machinesize: Standard_DS3_v2
+    storagtype: Standard_LRS
+    tags:
+      region: "{{ region }}"
+      infra: "true"
+      infratype: registry
+
+nodes:
+  node1:
+    name: node1
+    datadisksize: 80
+    machinesize: Standard_DS3_v2
+    storagtype: Standard_LRS
+    tags:
+      region: "{{ region }}"
+      infra: "false"
+      stage: dev
+      type: apps
+  node2:
+    name: node2
+    datadisksize: 80
+    machinesize: Standard_DS3_v2
+    storagtype: Standard_LRS
+    tags:
+      region: "{{ region }}"
+      infra: "false"
+      stage: dev
+      type: apps
